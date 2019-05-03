@@ -1,0 +1,3 @@
+10.60.1.1
+#Look at the last ip between you and the out side world.
+# 'traceroute slash16.org | head -2 | cut -d ' ' -f4 | tail -1' is the command which you can use to check quickly on this network.
