@@ -1,0 +1,7 @@
+ # 1 127.0.0.1       localhost
+ # 2 255.255.255.255 broadcasthost
+ # 3 ::1             localhost
+ # 4 10.68.1.1       cdn.intra.42.fr
+ # 5 46.19.122.85    intra.42.fr
+
+ #By addding it to the /etc/hosts file I've rerouted intra.42.fr to 46.19.122.85
