@@ -1,0 +1,5 @@
+cat /etc/resolv.conf
+
+#Deduction
+#Catting '/etc/resolv.conf' give you the domain name server as that is here macos tores it.
+#This is a symbotic link to /var/run/resolv.conf
