@@ -1,0 +1,1 @@
+ps -ef | grep sshd | grep root | awk '{print($2)}'
