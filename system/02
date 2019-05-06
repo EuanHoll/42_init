@@ -1,1 +1,1 @@
-sudo hostnamectl set-hostname ehollidg.com
+hostnamectl set-hostname ehollidg.com
