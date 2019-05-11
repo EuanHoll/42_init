@@ -1,4 +1,9 @@
 #!/bin/bash
+if [ -z "$1" ]
+then
+	echo "Please Enter a Place."
+	exit
+fi
 Q0=`command -v brew`
 if [ -z $Q0 ]
 then
@@ -9,7 +14,21 @@ if [ -z $Q1 ]
 then
 	brew install jq
 fi
-VAR=`curl -s --basic "http://api.openweathermap.org/data/2.5/weather?q=Amsterdam,NL&appid=41dd3b1803526136423add00ad4e9543"`
+VAR=`curl -s --basic "http://api.openweathermap.org/data/2.5/weather?q=$1&appid=41dd3b1803526136423add00ad4e9543"`
 VAR2=`echo $VAR | jq ".name" | sed 's/\"//g'`
-VAR3=`echo $VAR | jq ".weather[].description" | sed 's/\"//g'`
 echo "The Weather in $VAR2"
+VAR2=`echo $VAR | jq ".weather[].description" | sed 's/\"//g'`
+VAR2="$(tr '[:lower:]' '[:upper:]' <<< ${VAR2:0:1})${VAR2:1}"
+echo "Description : $VAR2"
+VAR2=`echo $VAR | jq ".main.temp"`
+VAR2=`bc <<< "$VAR2-273.15"`
+echo "Tempurature : "$VAR2"°C"
+VAR2=`echo $VAR | jq ".main.humidity"`
+echo "Humidity : "$VAR2"%"
+VAR2=`echo $VAR | jq ".wind.speed"`
+echo "Wind Speed : "$VAR2" m/s"
+VAR2=`echo $VAR | jq ".wind.deg"`
+if [ $VAR2 != "null" ]
+then
+	echo "Wind Direction : "$VAR2"°"
+fi
