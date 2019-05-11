@@ -1,0 +1,15 @@
+#!/bin/bash
+Q0=`command -v brew`
+if [ -z $Q0 ]
+then
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+Q1=`command -v jq`
+if [ -z $Q1 ]
+then
+	brew install jq
+fi
+VAR=`curl -s --basic "http://api.openweathermap.org/data/2.5/weather?q=Amsterdam,NL&appid=41dd3b1803526136423add00ad4e9543"`
+VAR2=`echo $VAR | jq ".name" | sed 's/\"//g'`
+VAR3=`echo $VAR | jq ".weather[].description" | sed 's/\"//g'`
+echo "The Weather in $VAR2 is "
