@@ -4,6 +4,11 @@ then
 	echo "Please Enter a Place."
 	exit
 fi
+if [ ! -z "$2" ]
+then
+	echo "Please Enter One Place."
+	exit
+fi
 Q0=`command -v curl`
 if [ -z $Q0 ]
 then
