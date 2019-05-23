@@ -4,18 +4,23 @@ then
 	echo "Please Enter a Place."
 	exit
 fi
-Q0=`command -v brew`
+Q0=`command -v curl`
 if [ -z $Q0 ]
 then
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	sudo apt-get install curl
 fi
 Q1=`command -v jq`
 if [ -z $Q1 ]
 then
-	brew install jq
+	sudo apt-get install jq
 fi
 VAR=`curl -s --basic "http://api.openweathermap.org/data/2.5/weather?q=$1&appid=41dd3b1803526136423add00ad4e9543"`
 VAR2=`echo $VAR | jq ".name" | sed 's/\"//g'`
+if (("$VAR2" == "null"))
+then
+	echo "Please Enter a compatible place."
+	exit
+fi
 echo "The Weather in $VAR2"
 VAR2=`echo $VAR | jq ".weather[].description" | sed 's/\"//g'`
 VAR2="$(tr '[:lower:]' '[:upper:]' <<< ${VAR2:0:1})${VAR2:1}"
