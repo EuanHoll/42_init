@@ -18,7 +18,7 @@ VAR=`curl -s --basic "http://api.openweathermap.org/data/2.5/weather?q=$1&appid=
 VAR2=`echo $VAR | jq ".name" | sed 's/\"//g'`
 if [ "$VAR2" == "null" ]
 then
-	echo "Please Enter a Place."
+	echo "Please Enter a Compatible Place."
 	exit
 fi
 echo "The Weather in $VAR2"
