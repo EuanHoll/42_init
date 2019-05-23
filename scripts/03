@@ -16,6 +16,11 @@ then
 fi
 VAR=`curl -s --basic "http://api.openweathermap.org/data/2.5/weather?q=$1&appid=41dd3b1803526136423add00ad4e9543"`
 VAR2=`echo $VAR | jq ".name" | sed 's/\"//g'`
+if [ "$VAR2" == "null" ]
+then
+	echo "Please Enter a Place."
+	exit
+fi
 echo "The Weather in $VAR2"
 VAR2=`echo $VAR | jq ".weather[].description" | sed 's/\"//g'`
 VAR2="$(tr '[:lower:]' '[:upper:]' <<< ${VAR2:0:1})${VAR2:1}"
