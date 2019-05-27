@@ -1,2 +1,2 @@
 #Graphical : type in your username and password when asked.
-#SSH : type in ssh <user>@<ip> then your password when asked.
+#SSH : type in ssh -p 2200 <user>@<ip> then your password when asked.
