@@ -9,8 +9,8 @@ then
 	echo "Please Enter One Place."
 	exit
 fi
-Q0=`command -v curl`
-if [ -z $Q0 ]
+Q1=`command -v curl`
+if [ -z $Q1 ]
 then
 	sudo apt-get install curl
 fi
@@ -19,11 +19,16 @@ if [ -z $Q1 ]
 then
 	sudo apt-get install jq
 fi
+Q1=`command -v bc`
+if [ -z $Q1 ]
+then
+	sudo apt-get install bc
+fi
 VAR=`curl -s --basic "http://api.openweathermap.org/data/2.5/weather?q=$1&appid=41dd3b1803526136423add00ad4e9543"`
 VAR2=`echo $VAR | jq ".name" | sed 's/\"//g'`
 if [ "$VAR2" == "null" ]
 then
-	echo "Please Enter a Compatible Place."
+	echo "$1 was not found. Please make sure the spelling is correct or that the place is supported."
 	exit
 fi
 echo "The Weather in $VAR2"
